@@ -3,19 +3,26 @@ version: '3.8'
 services:
   backend:
     build: ./backend
+    container_name: recipe-backend
     ports:
-      - "5001:5000"
-    volumes:
-      - recipe_data:/app/data
+      - "5000:5000"
+    environment:
+      - PORT=5000
+    networks:
+      - app-network
 
   frontend:
     build: ./frontend
+    container_name: recipe-frontend
     ports:
-      - "3000:80"
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://backend:5000/api
     depends_on:
       - backend
-    environment:
-      - VITE_API_URL=http://localhost:5000
+    networks:
+      - app-network
 
-volumes:
-  recipe_data:
+networks:
+  app-network:
+    driver: bridge
