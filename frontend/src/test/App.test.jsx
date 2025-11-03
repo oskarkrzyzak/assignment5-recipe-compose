@@ -6,7 +6,7 @@ import App from "../App";
 describe("App Component Tests", () => {
   test("renders Recipe Sharing App header", () => {
     render(<App />);
-    const headingElement = screen.getByRole("heading", { level: 3 });
+    const headingElement = screen.getByRole("heading", { level: 1 });
     expect(headingElement).toBeInTheDocument();
   });
 });
